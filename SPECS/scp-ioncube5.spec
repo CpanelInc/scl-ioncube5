@@ -32,9 +32,9 @@
 
 Name:    %{?scl_prefix}php-ioncube5
 Vendor:  ionCube Ltd.
-Summary: v5 Loader for ionCube-encoded PHP files
+Summary: Experimental v5 Loader for ionCube-encoded PHP files
 Version: 5.1.1
-Release: 1%{?dist}
+Release: 3%{?dist}
 License: Redistributable
 Group:   Development/Languages
 URL:     http://www.ioncube.com/loaders.php
@@ -50,13 +50,14 @@ BuildRequires: %{?scl_prefix}build
 BuildRequires: %{?scl_prefix}php-devel
 Requires:      %{?scl_prefix}php(zend-abi) = %{php_zend_api}
 Requires:      %{?scl_prefix}php(api) = %{php_core_api}
+Conflicts:     %{?scl_prefix}php-ioncube
 
 # Don't provide extensions as shared library resources
 %{?filter_provides_in: %filter_provides_in %{php_extdir}/.*\.so$}
 %{?filter_setup}
 
 %description
-The v5 ionCube Loader enables use of ionCube-encoded PHP files running
+The experimental v5 ionCube Loader enables use of ionCube-encoded PHP files running
 under PHP %{php_version}.
 
 %prep
@@ -75,7 +76,7 @@ install -m 755 ioncube_loader_lin_%{php_version}.so $RPM_BUILD_ROOT%{php_extdir}
 # The ini snippet
 install -d -m 755 $RPM_BUILD_ROOT%{php_inidir}
 cat > $RPM_BUILD_ROOT%{php_inidir}/%{inifile} <<EOF
-; Enable IonCube Loader extension module
+; Enable Experimental v5 IonCube Loader extension module
 zend_extension="%{php_extdir}/ioncube_loader_lin_%{php_version}.so"
 EOF
 
@@ -89,5 +90,11 @@ EOF
 %{php_extdir}/ioncube_loader_lin_%{php_version}.so
 
 %changelog
+* Wed Mar 23 2016 Dan Muey <dan@cpanel.net> - 5.1.1-3
+- Add conflict for ioncube v4 in same PHP version
+
+* Tue Mar 22 2016 Dan Muey <dan@cpanel.net> - 5.1.1-2
+- Make it clear this is an experimental tool
+
 * Thu Mar 17 2016 Dan Muey <dan@cpanel.net> - 5.1.1-1
 - Initial creation
