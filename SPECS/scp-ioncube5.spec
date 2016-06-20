@@ -34,7 +34,9 @@ Name:    %{?scl_prefix}php-ioncube5
 Vendor:  ionCube Ltd.
 Summary: Experimental v5 Loader for ionCube-encoded PHP files
 Version: 5.1.1
-Release: 3%{?dist}
+# Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
+%define release_prefix 5
+Release: %{release_prefix}%{?dist}.cpanel
 License: Redistributable
 Group:   Development/Languages
 URL:     http://www.ioncube.com/loaders.php
@@ -90,6 +92,9 @@ EOF
 %{php_extdir}/ioncube_loader_lin_%{php_version}.so
 
 %changelog
+* Mon Jun 20 2016 Dan Muey <dan@cpanel.net> - 5.1.1-5
+- EA-4383: Update Release value to OBS-proof versioning
+
 * Wed Mar 23 2016 Dan Muey <dan@cpanel.net> - 5.1.1-3
 - Add conflict for ioncube v4 in same PHP version
 
