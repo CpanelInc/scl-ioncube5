@@ -35,7 +35,7 @@ Vendor:  ionCube Ltd.
 Summary: Experimental v5 Loader for ionCube-encoded PHP files
 Version: 5.1.1
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
-%define release_prefix 5
+%define release_prefix 6
 Release: %{release_prefix}%{?dist}.cpanel
 License: Redistributable
 Group:   Development/Languages
@@ -52,6 +52,8 @@ BuildRequires: %{?scl_prefix}build
 BuildRequires: %{?scl_prefix}php-devel
 Requires:      %{?scl_prefix}php(zend-abi) = %{php_zend_api}
 Requires:      %{?scl_prefix}php(api) = %{php_core_api}
+Provides:      %{?scl_prefix}ioncube = 5
+Conflicts:     %{?scl_prefix}ioncube >= 6,  %{?scl_prefix}ioncube < 5
 Conflicts:     %{?scl_prefix}php-ioncube
 
 # Don't provide extensions as shared library resources
@@ -92,6 +94,9 @@ EOF
 %{php_extdir}/ioncube_loader_lin_%{php_version}.so
 
 %changelog
+* Mon Oct 03 2016 Edwin Buck <e.buck@cpanel.net> - 5.1.1-6
+- EA-5286: Reworked conflicts to conflict with ioncube6
+
 * Mon Jun 20 2016 Dan Muey <dan@cpanel.net> - 5.1.1-5
 - EA-4383: Update Release value to OBS-proof versioning
 
