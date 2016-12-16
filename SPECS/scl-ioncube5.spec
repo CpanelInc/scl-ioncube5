@@ -31,11 +31,11 @@
 %endif
 
 Name:    %{?scl_prefix}php-ioncube5
-Vendor:  ionCube Ltd.
+Vendor:  cPanel, Inc.
 Summary: Experimental v5 Loader for ionCube-encoded PHP files
 Version: 5.1.1
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
-%define release_prefix 6
+%define release_prefix 7
 Release: %{release_prefix}%{?dist}.cpanel
 License: Redistributable
 Group:   Development/Languages
@@ -94,6 +94,9 @@ EOF
 %{php_extdir}/ioncube_loader_lin_%{php_version}.so
 
 %changelog
+* Fri Dec 16 2016 Jacob Perkins <jacob.perkins@cpanel.net> - 5.1.1-7
+- EA-5493: Added vendor field
+
 * Mon Oct 03 2016 Edwin Buck <e.buck@cpanel.net> - 5.1.1-6
 - EA-5286: Reworked conflicts to conflict with ioncube6
 
