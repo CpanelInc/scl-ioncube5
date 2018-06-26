@@ -32,10 +32,10 @@
 
 Name:    %{?scl_prefix}php-ioncube5
 Vendor:  cPanel, Inc.
-Summary: Experimental v5 Loader for ionCube-encoded PHP files
+Summary: v5 Loader for ionCube-encoded PHP files
 Version: 5.1.1
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4572 for more details
-%define release_prefix 7
+%define release_prefix 8
 Release: %{release_prefix}%{?dist}.cpanel
 License: Redistributable
 Group:   Development/Languages
@@ -61,7 +61,7 @@ Conflicts:     %{?scl_prefix}php-ioncube
 %{?filter_setup}
 
 %description
-The experimental v5 ionCube Loader enables use of ionCube-encoded PHP files running
+The v5 ionCube Loader enables use of ionCube-encoded PHP files running
 under PHP %{php_version}.
 
 %prep
@@ -80,7 +80,7 @@ install -m 755 ioncube_loader_lin_%{php_version}.so $RPM_BUILD_ROOT%{php_extdir}
 # The ini snippet
 install -d -m 755 $RPM_BUILD_ROOT%{php_inidir}
 cat > $RPM_BUILD_ROOT%{php_inidir}/%{inifile} <<EOF
-; Enable Experimental v5 IonCube Loader extension module
+; Enable v5 IonCube Loader extension module
 zend_extension="%{php_extdir}/ioncube_loader_lin_%{php_version}.so"
 EOF
 
@@ -94,6 +94,9 @@ EOF
 %{php_extdir}/ioncube_loader_lin_%{php_version}.so
 
 %changelog
+* Wed Apr 25 2018 Daniel Muey <dan@cpanel.net> - 5.1.1-8
+- EA-7374: Remove Experimental verbiage from verbiage
+
 * Fri Dec 16 2016 Jacob Perkins <jacob.perkins@cpanel.net> - 5.1.1-7
 - EA-5493: Added vendor field
 
